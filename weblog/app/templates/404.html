@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block navbar %}
+<div class="navbar navbar-inverse" role="navigation">
+<div class="container">
+<div class="navbar-header">
+<button type="button" class="navbar-toggle"
+data-toggle="collapse" data-target=".navbar-collapse">
+<span class="sr-only">Toggle navigation</span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</button>
+<a class="navbar-brand" href="/">Home</a>
+</div>
+<div class="navbar-collapse collapse">
+<ul class="nav navbar-nav">
+</ul>
+</div>
+</div>
+</div>
+{% endblock %}
+
+{% block content %}
+<div id="main" class="main" data-hires="true" role="main">
+    <h1 class="section-headline">
+    很抱歉
+    <span class="puncuation">，</span>
+    你要查找的网页找不到
+    <span class="puncuation">。</span>
+    </h1>
+</div>
+{% endblock %}

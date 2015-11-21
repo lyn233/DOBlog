@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}Article{% endblock %}
+{% import "wtf.html" as wtf %}
+{% block content %}
+{{super()}}
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+       <!--<ul class="posts" style="width:1200px">-->
+
+<div class="post" style="margin-bottom:40px;;border:13px;box-shadow:10px 10px 20px #CCC;">
+	<article class="" style=""><a href="{{url_for('.entry',id=post.id)}}">{{post.title}}</a></article>
+	<div class="" style="color:grey"><span style="">Post time:</span> {{post.post_time}}</div>
+	<div class="post-body" style="padding:2px">{{ post.body_html | safe }}</div>
+	<div class="post-author" style="margin:2px;padding:2px"><span>作者：{{post.author.name}}</span><span style="float:right;">标签: <span style="color:purple">{{post.tag.tag_name}}</span></span></div>
+
+</div>
+
+			</div>
+	</div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+{{ pagedown.include_pagedown() }}
+{% endblock %}

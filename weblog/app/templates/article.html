@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}Article{% endblock %}
+{% import "wtf.html" as wtf %}
+{% block content %}
+{{super()}}
+        <style>
+            ul.posts {width:900px;position:relative;left:3%}
+        </style>
+<ul class="posts">
+{% for post in posts %}
+    {% if current_user == post.author %}
+<li class="post" style="margin-bottom:40px;;border:13px;box-shadow:10px 10px 20px #CCC;">
+	<article class="" style=""><a href="{{url_for('.entry',id=post.id)}}">{{post.title}}</a></article>
+	<div class="" style="color:grey"><span style="">Post time:</span> {{post.post_time}}</div>
+	<div class="post-body" style="padding:2px">{{ post.summary_html | safe }}</div>
+	<div class="post-author" style="margin:2px;padding:2px"><span>作者：{{post.author.name}}</span>
+		<a style="float:right;color:blue" href="{{url_for('.entry',id=post.id)}}">
+			<span class="btn btn-default btn-xs" style="color:purple">Read more</span>
+		</a>
+	</div>
+
+	<a href="{{ url_for('.edit', id=post.id) }}">
+		<span class="btn btn-warning btn-xs">Edit</span>
+	</a>
+		<span class="btn btn-danger btn-xs">Delete</span>
+{% endif %}
+
+</li>
+{% endfor %}
+</ul>
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+{{ pagedown.include_pagedown() }}
+{% endblock %}

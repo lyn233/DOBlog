@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}Tag-search{% endblock %}
+{% import "_macros.html" as macros %}
+{% import "wtf.html" as wtf %}
+{% block content %}
+    {{super()}}
+<div class="container">
+	<div class="row">
+		<div class="col-md-9">
+
+{% for post in posts %}
+<li class="post" style="margin-bottom:40px;;border:1px;box-shadow:15px 13px 20px #CCC;">
+	<article class="" style=""><a href="{{url_for('.entry',id=post.id)}}">{{post.title}}</a></article>
+	<div class="" style="color:grey"><span style="">Post time:</span> {{post.post_time}}</div>
+	<div class="post-body" style="padding:2px">{{ post.summary_html | safe }}</div>
+	<div class="post-author" style="margin:2px;padding:2px"><span>作者：{{post.author.name}}</span>
+		<a style="float:right;color:blue" href="{{url_for('.entry',id=post.id)}}">
+			<span class="btn btn-default btn-xs" style="color:purple">Read more</span>
+		</a>
+	</div>
+</li>
+{% endfor %}
+		</div>
+	</div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+{{ pagedown.include_pagedown() }}
+{% endblock %}

@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% block title %}About{% endblock %}
+{% block content %}
+    {{super()}}
+        <div class="container" >
+            <div class="row">
+                <div class="col-md-6">
+                    <img src="http://7xnxh1.com1.z0.glb.clouddn.com/jingyin.jpeg">
+                </div>
+                <div class="col-md-6" style="margin-bottom:40px;border:1px;box-shadow:15px 13px 20px #CCC;">
+                    <div class="me">
+                        <div class="my-pro">
+                            <h2 style="border-bottom:1px solid #DAD4D4">个人信息：</h2>
+                        </div>
+                        <div class="cont" style="">
+                        <li>姓名：戴冠琳</li>
+                        <li>居住地：北京</li>
+                        </div>
+                    </div>
+                    <div class="contract">
+                        <h2 style="border-bottom:1px solid #DAD4D4">联系方式：</h2>
+                        <div class="cont">
+                            <li>邮箱：daiguanlin@126.com</li>
+                        </div>
+
+                    </div>
+                    <li>本站源代码：<a href="https://github.com/lyn233/DOBlog.git">https://github.com/lyn233/DOBlog.git</a> </li>
+                </div>
+            </div>
+        </div>
+<p>
+    <input type=text size=5 name=a> +
+    <input type=text size=5 name=b> =
+    <span id=result>?</span>
+</p>
+<p><input type="button" id="calculate" value="计算"></p>
+
+<p><span id=name>?</span></p>
+<p><span id=time>?</span></p>
+<p><input type="button" id="getname" value="用户名"></p>
+{% endblock %}
+
+{% block scripts %}
+    {{super()}}
+<script type="text/javascript">
+    $(document).ready(function(){
+
+		$("#calculate").click(function(){
+		    $.getJSON($SCRIPT_ROOT + '/add',
+		        {
+                    a: $('input[name="a"]').val(),
+                    b: $('input[name="b"]').val(),
+                    now: new Date().getTime()
+                },
+            function(data)
+                {
+                    $('#result').text(data.result);
+                }
+                  )
+		});
+		$("#getname").click(function(){
+		    $.getJSON($SCRIPT_ROOT + '/getname',
+		        {
+		            now: new Date().getTime()
+		        },
+		    function(data)
+		        {
+		            $('#name').text(data.name);
+		        }
+		          )
+		})
+	})
+</script>
+{% endblock %}

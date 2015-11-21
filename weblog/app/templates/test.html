@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Test</title>
+    <style type="text/css">h1 {border-bottom:1px solid grey;color:grey;font-family:sans-serif}
+    blockquote {background-color:grey}
+    p.green {color:green}
+    p.red {color:red  }
+    </style>
+    <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.1.4.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function(){$("button").click(function(){$(this).hide();});});
+    </script>
+</head>
+<body>
+<h1>终于要离职了！</h1>
+<p class="green">真是有点小兴奋呢！马上要开始新的旅程啦！<br>加盐！！！<br>
+<img src="file:///D:/skyline/recycle/static/twins.jpeg" alt="静音双子">
+<a target="_tea" href="http://www.baidu.com" title="指向百度">不来一发链接么~</a><br>
+<a target="_coffe" href="http://www.bilibili.com/video/av2802527/" title="Bilibili"><img src="http://c.hiphotos.baidu.com/baike/c0%3Dbaike80%2C5%2C5%2C80%2C26/sign=ffe9301595ef76c6c4dff379fc7f969f/faedab64034f78f0ed0278c77c310a55b3191cfc.jpg"></a>
+<p><em>这里是重点</em></p>
+<ol>
+<li>plc</li>
+    <ul>
+        <li>GS</li>
+    </ul>
+<li>hmi</li>
+</ol>
+
+<blockquote>听说还有引用？那就来来一个千里之行始于足下把·--Lyn</blockquote>
+<button type="button">Click me</button>
+<p class="red 1">感觉应该再来一段作为结束</p>
+<p class="red 2">red 2</p>
+<p class="ab red 3">red3</p>
+<p id="js" onmouseover="yourFunction()" onmouseout="myFunction()" style="color:red">点我</p>
+<script>
+function myFunction()
+{
+    var ele = document.getElementById("js")
+    ele.innerHTML="time"
+    ele.style.color= 'black'
+}
+function yourFunction()
+{
+    var ele = document.getElementById("js")
+    ele.innerHTML=Date()
+    ele.style.color= 'green'
+}
+</script>
+</body>
+</html>

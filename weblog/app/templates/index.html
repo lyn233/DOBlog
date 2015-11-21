@@ -1,0 +1,108 @@
+{% extends "base.html" %}
+{% import "wtf.html" as wtf %}
+{% import "_macros.html" as macros %}
+{% block title %}Lyn233{% endblock %}
+
+
+{% block content %}
+        {{super()}}
+       <!-- <style>
+            ul.posts {background-color:#EEE;width:900px;position:relative;left:3%}
+            div.col {float:center,bottom}
+            div.post-body {color:black;background-color:#EEE;text-indent:2em}
+			div.tag {position:absolute;right:20px;top:75px;width:200px;background-color:#EEE;border:5px;box-shadow:10px 10px 20px #CCC;}
+        </style> -->
+		<style>
+
+		</style>
+<div class="container">
+	<div class="row">
+		<div class="col-md-9">
+			<ul class="posts">
+				{% for post in posts %}
+					<li class="post" style="margin-bottom:40px;;border:1px;box-shadow:15px 13px 20px #CCC;">
+					<article class="" style=""><a href="{{url_for('.entry',id=post.id)}}">{{post.title}}</a></article>
+					<div class="" style="color:grey"><span style="">Post time:</span> {{post.post_time}}</div>
+					<div class="post-body" style="padding:2px">{{ post.summary_html | safe }}</div>
+					<div class="post-author" style="margin:2px;padding:2px"><span>作者：{{post.author.name}}</span>
+							<a style="float:right;color:blue" href="{{url_for('.entry',id=post.id)}}">
+								<span class="btn btn-default btn-xs" style="color:purple">Read more</span>
+							</a>
+					</div>
+
+				{% if current_user == post.author %}
+					<a href="{{ url_for('.edit', id=post.id) }}">
+						<span class="btn btn-warning btn-xs">Edit</span>
+					</a>
+					<span class="btn btn-danger btn-xs btn-delete-post" id="{{post.id}}">Delete</span>
+				{% endif %}
+					</li>
+				{% endfor %}
+				<div class="pagination">
+					{{ macros.pagination_widget(pagination, '.index') }}
+				</div>
+			</ul>
+		</div>
+		<div class="col-md-3">
+			<div class="tag" style="">
+				<article style="border-bottom:1px solid #DAD4D4;padding:10px 10px;font-size:18px;"><span style="position:relative;left:10%;font-weight:bold">标签</span></article>
+					{% for tag in tags %}
+						<ul class="presentation" style="padding-top:5px;">
+							<a href="/tag/{{tag.tag_name}}" >
+								<p>
+									<span style="font-size:15px;">> {{ tag.tag_name|upper }}</span>
+									<span class="badge text-right" style="float:right">{{ tag.tag_count }}</span>
+								</p></a>
+						</ul>
+					{% endfor %}
+		</div>
+		</div>
+	</div>
+
+</div>
+
+
+<div class="time" style="color:grey;margin:10px">
+<p>本地时间: {{moment(current_time).format('LLL')}}</p>
+<p>刷新于{{moment(current_time).fromNow(refresh=True)}}</p>
+</div>
+<div style="background:black none repeat scroll 0% 0%;color:#BFC9D3;float:bottom">
+	<div class="container">
+		<div class="row" style="padding-top:30px;">
+			<div class="col-md-7">
+				<p class="lead"> Designed and built by <a href="/">Lyn</a>.</p>
+				<p >@SERVER BY <strong>NGINX</strong> AND POWER BY <strong>DIGITALOCEAN</strong>.</p>
+
+			</div>
+			<div class="col-md-5">
+				<div>
+					<h5 style="margin-bottom:15px;margin-left:18px;"><strong>CONTACT ME</strong></h5>
+					<ul>
+						<li><a href="#"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> &nbsp WECHAT</a></li>
+						<li><a href="https://github.com/lyn233"><span class="glyphicon glyphicon-piggy-bank" aria-hidden="true"></span> &nbsp GitHub </a></li>
+						<li><a href="#"><span class=" glyphicon glyphicon-send" aria-hidden="true"></span>&nbsp EMAIL:<strong>&nbsp daiguanlin@126.com</strong></a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="col-md-12">
+				<p> <small>© COPYRIGHT BY Lyn 2015</small></p>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+	{{ super() }}
+	{{ pagedown.include_pagedown() }}
+	{{moment.include_moment()}}
+<script type="text/javascript">
+    $(document).ready(function(){
+		$("span.btn-delete-post").click(function(){
+			var post_id = $(this).attr('id');
+		    $.post($SCRIPT_ROOT + '/delete/'+post_id)
+		})
+
+	})
+</script>
+{% endblock %}
